@@ -20,27 +20,33 @@ print(caffeine_tolerance)
 
 caffeine_level = 0
 
+
 def add_caffeine(num):
     global caffeine_level
-
-    print(num)
     caffeine_level += int(num)
-    print(type(caffeine_level))
-    print(caffeine_level)
     caffeine_entry.delete(0, END)
     caffeine_entry.insert(0, caffeine_level)
+
 
 def _exit():
     root.destroy()
 
+
 root = Tk()
 root.title("Caffeine Tracker")
 
-title_label = Label(root, text="CAFFEINE TOLERANCE", font=("Helvetica 16 bold"))
-title_label.grid(row=0, column=0, columnspan=4, pady=[5, 10])
+title_label = Label(
+    root,
+    width=34,
+    height=2,
+    text="CAFFEINE TOLERANCE",
+    font=("Helvetica 16 bold"),
+    bg="#bfbfbf",
+)
+title_label.grid(row=0, column=0, columnspan=4, pady=[0, 20])
 
 # ---------------- BAR GRAPH FRAME -----------------
-bar_frame = Frame(root, pady=5)
+bar_frame = Frame(root)
 bar_frame.grid(row=1, column=0, padx=[60, 0])
 
 red_bar = Label(bar_frame, width=4, height=2, bg="#DF0020")
@@ -61,32 +67,55 @@ line_frame.grid(row=1, column=1, padx=[0, 30])
 line_label = Label(line_frame, text="<", font=("Helvetica 15 bold"))
 line_label.grid(row=0, column=0, pady=[0, 20])
 
-my_num = 300
-if my_num < 200:
-    line_label.grid(pady=[120, 0])
-elif my_num < 400:
-    line_label.grid(pady=[50, 0])
-
-
 # ----------------- INFORMATION FRAME -------------------
-info_frame = Frame(root, padx=10, pady=5)
-info_frame.grid(row=1, column=2)
+info_frame = Frame(root, padx=10)
+info_frame.grid(row=1, column=2, ipady=10)
 
-tolerance_label = Label(info_frame, text="Your tolerance is:", font=("Helvetica 10 bold"))
+tolerance_label = Label(
+    info_frame, text="Your tolerance is:", font=("Helvetica 10 bold")
+)
 tolerance_label.grid(row=0, column=0)
 
-info_frame_label = Label(info_frame, text=caffeine_tolerance)
-info_frame_label.grid(row=1, column=0, pady=[0, 20])
+info_frame_label = Label(info_frame, text=caffeine_tolerance, font=("15"))
+info_frame_label.grid(row=1, column=0)
 
-todays_caffeine_label = Label(info_frame, text="Add today's caffeine:", font=("Helvetica 10 bold"))
-todays_caffeine_label.grid(row=2, column=0)
+color_label = Label(info_frame, font=("Helvetica 12 bold"))
+color_label.grid(row=2, column=0, pady=20)
+
+todays_caffeine_label = Label(
+    info_frame, text="Add today's caffeine:", font=("Helvetica 10 bold")
+)
+todays_caffeine_label.grid(row=3, column=0, pady=[10, 0])
 caffeine_entry = Entry(info_frame, width=4, justify="right")
-caffeine_entry.grid(row=3, column=0, pady=[0, 80])
+caffeine_entry.grid(row=4, column=0)
 mg_label = Label(info_frame, text="mg")
-mg_label.grid(row=3, column=0, sticky="e", padx=30, pady=[0, 80])
+mg_label.grid(row=4, column=0, sticky="e", padx=30)
+
+my_num = 20
+if my_num < 50:
+    line_label.grid(pady=[175, 0])
+    color_label.config(fg="#0000FF", text="NONE")
+elif my_num < 200:
+    line_label.grid(pady=[140, 0])
+    color_label.config(fg="#0000FF", text="MINIMAL")
+elif my_num < 400:
+    line_label.grid(pady=[70, 0])
+    color_label.config(fg="#00A000", text="LOW")
+elif my_num < 600:
+    line_label.grid(pady=[0, 0])
+    color_label.config(fg="#FFE500", bg="black", text="MODERATE")
+elif my_num < 800:
+    line_label.grid(pady=[0, 70])
+    color_label.config(fg="#FF9300", text="HIGH")
+elif my_num < 1000:
+    line_label.grid(pady=[0, 140])
+    color_label.config(fg="#DF0020", text="VERY HIGH")
+else:
+    line_label.grid(pady=[0, 175])
+    color_label.config(fg="#DF0020", text="VERY HIGH")
 
 # ---------------- ADD CAFFEINE FRAME -------------------
-add_frame = LabelFrame(root, text="Add Caffeine", padx=10, pady=5)
+add_frame = LabelFrame(root, text="Add Caffeine", padx=10)
 add_frame.grid(row=1, column=3, padx=20)
 
 coffee_label = Label(add_frame, text="Coffee")
@@ -119,7 +148,9 @@ five_hour_label.grid(row=5, column=0)
 five_hour_button = Button(add_frame, text="ADD", command=lambda: add_caffeine(200))
 five_hour_button.grid(row=5, column=1, pady=2)
 
-exit_button = Button(root, text="EXIT", width=20, font=("Helvetica 16 bold"), command=_exit)
+exit_button = Button(
+    root, text="EXIT", width=20, font=("Helvetica 16 bold"), command=_exit
+)
 exit_button.grid(row=2, column=0, padx=10, pady=10, columnspan=4)
 
 root.mainloop()
