@@ -6,18 +6,18 @@ caffeine_list = [1280, 1280, 1680, 240, 320, 560, 960, 1360, 160, 120]
 # print(sum(caffeine_list[-7:]) / 7)
 # print(caffeine_list[-7:])
 
-my_num = 1000
+tolerance = sum(caffeine_list[-7:]) / 7
+print(tolerance)
 
 for index in range(0, 10):
-    # print(f"Day {index}: {my_num}")
-    my_num = my_num * 0.9 - 50
+    print(f"Day {index}: {tolerance}")
+    tolerance = tolerance * 0.9 - 50
 
-caffeine_tolerance = f"{round(my_num)}mg"
+caffeine_tolerance = f"{round(tolerance)}mg"
 print(caffeine_tolerance)
 
 
 # ------------------------------------------------------------------
-
 caffeine_level = 0
 
 
@@ -69,18 +69,18 @@ line_label.grid(row=0, column=0, pady=[0, 20])
 
 # ----------------- INFORMATION FRAME -------------------
 info_frame = Frame(root, padx=10)
-info_frame.grid(row=1, column=2, ipady=10)
+info_frame.grid(row=1, column=2, ipady=1)
 
 tolerance_label = Label(
     info_frame, text="Your tolerance is:", font=("Helvetica 10 bold")
 )
 tolerance_label.grid(row=0, column=0)
 
-info_frame_label = Label(info_frame, text=caffeine_tolerance, font=("15"))
+info_frame_label = Label(info_frame, text=f"{round(tolerance)}mg", font=("15"))
 info_frame_label.grid(row=1, column=0)
 
 color_label = Label(info_frame, font=("Helvetica 12 bold"))
-color_label.grid(row=2, column=0, pady=20)
+color_label.grid(row=2, column=0, pady=10)
 
 todays_caffeine_label = Label(
     info_frame, text="Add today's caffeine:", font=("Helvetica 10 bold")
@@ -91,23 +91,25 @@ caffeine_entry.grid(row=4, column=0)
 mg_label = Label(info_frame, text="mg")
 mg_label.grid(row=4, column=0, sticky="e", padx=30)
 
-my_num = 20
-if my_num < 50:
+add_caffeine_button = Button(info_frame, text="ADD", width=10)
+add_caffeine_button.grid(row=5, column=0, pady=10)
+
+if tolerance < 50:
     line_label.grid(pady=[175, 0])
     color_label.config(fg="#0000FF", text="NONE")
-elif my_num < 200:
+elif tolerance < 200:
     line_label.grid(pady=[140, 0])
     color_label.config(fg="#0000FF", text="MINIMAL")
-elif my_num < 400:
+elif tolerance < 400:
     line_label.grid(pady=[70, 0])
     color_label.config(fg="#00A000", text="LOW")
-elif my_num < 600:
+elif tolerance < 600:
     line_label.grid(pady=[0, 0])
     color_label.config(fg="#FFE500", bg="black", text="MODERATE")
-elif my_num < 800:
+elif tolerance < 800:
     line_label.grid(pady=[0, 70])
     color_label.config(fg="#FF9300", text="HIGH")
-elif my_num < 1000:
+elif tolerance < 1000:
     line_label.grid(pady=[0, 140])
     color_label.config(fg="#DF0020", text="VERY HIGH")
 else:
