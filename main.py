@@ -1,23 +1,5 @@
 from tkinter import Tk, Label, Frame, LabelFrame, Button, Entry, END
 
-# ---------------------- TESTING ALGORITHMN ---------------------
-caffeine_list = [1280, 1280, 1680, 240, 320, 560, 960, 1360, 160, 120]
-
-# print(sum(caffeine_list[-7:]) / 7)
-# print(caffeine_list[-7:])
-
-tolerance = sum(caffeine_list[-7:]) / 7
-print(tolerance)
-
-for index in range(0, 10):
-    print(f"Day {index}: {tolerance}")
-    tolerance = tolerance * 0.9 - 50
-
-caffeine_tolerance = f"{round(tolerance)}mg"
-print(caffeine_tolerance)
-
-
-# ------------------------------------------------------------------
 caffeine_level = 0
 
 
@@ -31,6 +13,14 @@ def add_caffeine(num):
 def _exit():
     root.destroy()
 
+
+caffeine_list = [1280, 1280, 1680, 240, 320, 560, 960, 1360, 160, 120]
+
+tolerance = 0
+for daily in caffeine_list[-7:]:
+    tolerance += (daily * 0.9 - 50) / 7
+
+tolerance = round(tolerance) if tolerance > 0 else 0
 
 root = Tk()
 root.title("Caffeine Tracker")
