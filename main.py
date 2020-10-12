@@ -23,6 +23,7 @@ for daily in caffeine_list[-7:]:
 tolerance = round(tolerance) if tolerance > 0 else 0
 
 root = Tk()
+root.geometry("450x350+500+300")
 root.title("Caffeine Tracker")
 
 title_label = Label(
