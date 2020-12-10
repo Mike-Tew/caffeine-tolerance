@@ -1,3 +1,11 @@
+# TODO
+# Create a 'show' button that displays previous days of caffeine when clicked
+#   - Create show button
+#   - Create a daily caffeine frame that shows/hides when button is clicked
+# Connect daily caffeine level to a database. SQLite?
+#   - Create a database
+#   - Auto generate date and insert into table
+
 from tkinter import Tk, Label, Frame, LabelFrame, Button, Entry, END
 
 caffeine_level = 0
@@ -14,7 +22,7 @@ def _exit():
     root.destroy()
 
 
-caffeine_list = [1280, 1280, 1680, 240, 320, 560, 960, 1360, 160, 120]
+caffeine_list = [480, 720, 720, 275, 395, 320, 120, 320, 520, 370]
 
 tolerance = 0
 for daily in caffeine_list[-7:]:
