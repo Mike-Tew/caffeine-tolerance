@@ -22,7 +22,19 @@ def _exit():
     root.destroy()
 
 
-caffeine_list = [480, 720, 720, 275, 395, 320, 120, 320, 520, 370]
+caffeine_list = [
+    320,
+    120,
+    320,
+    520,
+    370,
+    120,
+    720,
+    575,
+    320,
+    475,
+    880,
+]
 
 tolerance = 0
 for daily in caffeine_list[-7:]:
